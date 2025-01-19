@@ -1,0 +1,101 @@
+# Bizaway Test
+
+`bizaway-test` is a Node.js application created as a test solution for the selection process of Pablo Muyrillo Dávila at Bizaway. This application can be run either using Docker Compose or directly on your local machine with Node.js and MongoDB provided by the user.
+
+## Table of Contents
+1. [Prerequisites](#prerequisites)
+2. [Setup with Docker Compose](#setup-with-docker-compose)
+3. [Setup without Docker Compose (Node.js)](#setup-without-docker-compose-nodejs)
+4. [Usage](#usage)
+5. [Configuration](#configuration)
+6. [License](#license)
+
+## Prerequisites
+
+Before setting up the application, make sure you have the following installed:
+
+- Docker & Docker Compose (for Docker setup)
+- Node.js (for direct setup)
+- MongoDB (for direct setup)
+
+## Setup with Docker Compose
+
+To build and run the application using Docker Compose, follow these steps:
+
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/your-repository/bizaway-test.git
+   cd bizaway-test
+   ```
+
+2. Make sure `docker` and `docker-compose` are installed on your machine.
+
+3. Create a `.env.docker` file in the project root and fill it as in the `.env.sample` example file.
+
+
+4. Start the application using Docker Compose:
+
+   ```bash
+   docker-compose up --build
+   ```
+
+   This command will build the Docker images and start the application, including the MongoDB container. The app will be accessible at `http://localhost:8080`.
+
+5. To stop the application:
+
+   ```bash
+   docker-compose down
+   ```
+
+## Setup without Docker Compose (direct setup)
+
+If you prefer to run the application without Docker Compose, follow these steps:
+
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/your-repository/bizaway-test.git
+   cd bizaway-test
+   ```
+
+2. Install Node.js dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Set up MongoDB locally:
+
+   You can either install MongoDB on your machine or use a cloud-based instance. You may need to create a database named as the environment variable `DB_NAME`. If you're using a local MongoDB instance, make sure it’s running and accessible.
+
+4. Create a `.env` file in the project root and fill it as in the `.env.sample` example file. Adjust the `DB_CONN_STRING` and `DB_NAME` if you're using a different MongoDB configuration.
+
+5. Start the application:
+
+   ```bash
+   npm start
+   ```
+
+   The application will now be running at `http://localhost:8080`.
+
+6. To stop the application, simply press `CTRL+C` in the terminal.
+
+## Usage
+
+Once the application is running, you can access it in your browser at:
+
+```
+http://localhost:8080
+```
+
+Follow the application instructions on the page for further interactions.
+
+## Configuration
+
+You can configure the app parameters by adjusting the fields in the `.env` or `.env.docker` file.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```
