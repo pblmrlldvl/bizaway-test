@@ -37,7 +37,7 @@ namespace Trips {
         duration: number,
         type: string,
         id: string,
-        displayName: string
+        displayName?: string
     }
 }
 

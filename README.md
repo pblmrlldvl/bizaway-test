@@ -1,6 +1,7 @@
+
 # Bizaway Test
 
-`bizaway-test` is a Node.js application created as a test solution for the selection process of Pablo Muyrillo Dávila at Bizaway. This application can be run either using Docker Compose or directly on your local machine with Node.js and MongoDB provided by the user.
+`bizaway-test` is a Node.js application created as a test solution for the selection process of Pablo Murillo Dávila at Bizaway. This application can be run either using Docker Compose or directly on your local machine with Node.js and MongoDB provided by the user.
 
 ## Table of Contents
 1. [Prerequisites](#prerequisites)
@@ -32,7 +33,6 @@ To build and run the application using Docker Compose, follow these steps:
 2. Make sure `docker` and `docker-compose` are installed on your machine.
 
 3. Create a `.env.docker` file in the project root and fill it as in the `.env.sample` example file.
-
 
 4. Start the application using Docker Compose:
 
@@ -89,7 +89,39 @@ Once the application is running, you can access it in your browser at:
 http://localhost:8080
 ```
 
-Follow the application instructions on the page for further interactions.
+### API Endpoints
+
+Here are the available API endpoints:
+
+- **GET /trips**  
+  Returns a list of trips from the external service.  
+  **Response:**  
+  - `200 OK`: List of items in JSON format.
+
+- **GET /trips/saved**  
+  Returns a list of previously saved trips.  
+  **Response:**  
+  - `200 OK`: The item data in JSON format.  
+
+- **POST /trips/saved**  
+  Saves a new trip in the database.  
+  **Request Body fields (JSON):**  
+  - `origin` (string): IATA 3 letter code of the origin.  
+  - `destination` (string): IATA 3 letter code of the destination.
+  - `cost` (number): Cost of the trip.
+  - `duration` (number): Duration of the trip.
+  - `type` (string): Trip type.
+  - `id` (string): Unique trip identifier.
+  - `display_name` (string): Trip name.
+
+  **Response:**  
+  - `201 Created`: The created trip in JSON format.
+
+- **DELETE /trips/saved/:id**  
+  Deletes a previously saved trip by its ID.  
+  **Response:**  
+  - `204 No Content`: If the item was deleted successfully.  
+  - `404 Not Found`: If the item does not exist.
 
 ## Configuration
 
@@ -99,3 +131,8 @@ You can configure the app parameters by adjusting the fields in the `.env` or `.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 ```
+
+### Explanation:
+- The entire `README.md` text is in markdown format.
+- It contains sections for prerequisites, setup instructions, usage, API endpoints, configuration, and license.
+- The **API Endpoints** section lists all available routes with their HTTP methods, descriptions, and response details.

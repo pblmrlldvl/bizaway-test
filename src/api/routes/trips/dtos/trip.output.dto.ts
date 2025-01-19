@@ -1,5 +1,6 @@
 import { Expose } from 'class-transformer'
 import Trips from '../../../../domain/trips/trips.types'
+import { isNil } from 'lodash/fp'
 
 export class TripOutputDto {
   @Expose() origin!: string
@@ -8,7 +9,7 @@ export class TripOutputDto {
   @Expose() duration!: number
   @Expose() type!: string
   @Expose() id!: string
-  @Expose() display_name!: string
+  @Expose() display_name?: string
 
   static fromDomain(trip: Trips.Trip): TripOutputDto {
     return {
@@ -18,7 +19,7 @@ export class TripOutputDto {
       duration: trip.duration,
       type: trip.type,
       id: trip.id,
-      display_name: trip.displayName,
+      ...(!isNil(trip.displayName) && {display_name: trip.displayName}),
     }
   }
 }
