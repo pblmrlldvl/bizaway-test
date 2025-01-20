@@ -1,5 +1,5 @@
-import DomainError from "../domain-error"
-import DomainErrors from "../domain-errors.enum"
+import DomainError from "./domain-error"
+import DomainErrors from "./domain-errors.enum"
 
 export default class ExternalServiceError extends DomainError {
     service: string

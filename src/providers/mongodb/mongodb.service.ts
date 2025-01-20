@@ -1,8 +1,13 @@
 import { DbFunctions } from './mongodb'
+import { IDataSource } from '../../domain/shared/types'
 
-import IDataSource from '../../domain/shared/data-source.interface'
-
-export default class MongoDbService<ClassType, Class extends ClassType> implements IDataSource {
+/**
+ * MongoDbService is a generic service class for interacting with a MongoDB collection.
+ * It currently provides methods to perform CRUD operations on the specified collection.
+ *
+ * @implements IDataSource as it is intended to act as data source for domain entities
+ */
+export default class MongoDbService implements IDataSource {
   private collectionName: string
   protected dbFunctions: DbFunctions
   constructor({
@@ -19,7 +24,7 @@ export default class MongoDbService<ClassType, Class extends ClassType> implemen
   }
 
   async getById(id: string) {
-    const result = await this.dbFunctions.findById(this.collectionName, id)
+    const result = await this.dbFunctions.findOne(this.collectionName, { id })
     return result || null
   }
 
@@ -32,14 +37,16 @@ export default class MongoDbService<ClassType, Class extends ClassType> implemen
     return results || []
   }
 
-  async create(values: Partial<Omit<ClassType, 'id' | 'created' | 'updated'>>) {
+  async create(values: any) {
     const result = await this.dbFunctions.insertOne(this.collectionName, values)
 
     return this.getById(result.insertedId.toString())
   }
 
-  async deleteById(id: any) {
-    const result = await this.dbFunctions.deleteOne(this.collectionName, { id })
+  async deleteById(id: string) {
+    const result = await this.dbFunctions.updateMany(this.collectionName, { id }, {
+      $set: { deleted: true, updatedAt: new Date() }
+    })
 
     if (result.acknowledged && result.modifiedCount > 0) return true
     return false

@@ -2,8 +2,8 @@ import { ValidationError } from 'class-validator'
 import { Request, Response, NextFunction } from 'express'
 import { isArray } from 'lodash/fp'
 
-import DomainError from '../../domain/shared/domain-error'
-import DomainErrors from '../../domain/shared/domain-errors.enum'
+import DomainError from '../../domain/shared/domain-errors/domain-error'
+import DomainErrors from '../../domain/shared/domain-errors/domain-errors.enum'
 import { errorCodesMap, statusCodesMap } from '../../api/error-mapper'
 
 export const errorHandler = (e: any, req: Request, res: Response, next: NextFunction) => {

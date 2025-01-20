@@ -3,6 +3,10 @@ import axios from 'axios'
 import Trips from '../../domain/trips/trips.types'
 import { toDomain } from './trips-api.service.adapters';
 
+/**
+ * Service class to interact with the external Trips API.
+ * Implements the domain TripsApiInterface.
+ */
 export class TripsApiService implements Trips.TripsApiInterface {
     async getTrips(origin: string, destination: string) {
         try {

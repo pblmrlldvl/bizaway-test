@@ -1,19 +1,12 @@
 import { identity, pipe } from "lodash/fp"
 
-import DataSource from "./data-source.interface"
-
-export interface IBaseRepository<T> {
-    getById(id: string): Promise<T | null>
-    getAll(query: any): Promise<T[]>
-    create(values: any): Promise<T | null>
-    deleteById(id: string): Promise<boolean>
-}
+import { IDataSource, IBaseRepository } from "./types"
 
 export default class BaseRepository<ClassType, Class extends ClassType> implements IBaseRepository<Class> {
     public fromDataBase: (arg: Record<any, any>) => Class
     public toDataBase: (arg: any) => Record<any, any>
     constructor(
-        private source: DataSource,
+        private source: IDataSource,
         classConstructor: (arg: any) => Class,
         fromDataBaseAdapter?: (arg: Record<any, any>) => ClassType,
         toDataBaseAdapter?: (arg: Partial<ClassType>) => Record<any, any>

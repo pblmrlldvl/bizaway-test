@@ -1,4 +1,4 @@
-import DomainErrors from "../domain/shared/domain-errors.enum"
+import DomainErrors from "../domain/shared/domain-errors/domain-errors.enum"
 
 export const statusCodesMap: Record<DomainErrors, number> = {
   [DomainErrors.UNKNOWN_ERROR]: 500,

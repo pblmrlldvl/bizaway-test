@@ -1,4 +1,8 @@
 namespace Trips {
+    /**
+     * The array is defined as a constant assertion in order to be able to later use it
+     * or any subset of it as a string union-type
+     */
     export const countryCodesAssertion = [
         "ATL", "PEK", "LAX", "DXB", "HND", "ORD", "LHR", "PVG", "CDG", "DFW",
         "AMS", "FRA", "IST", "CAN", "JFK", "SIN", "DEN", "ICN", "BKK", "SFO",
