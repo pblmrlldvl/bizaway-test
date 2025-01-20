@@ -32,7 +32,7 @@ To build and run the application using Docker Compose, follow these steps:
 
 2. Make sure `docker` and `docker-compose` are installed on your machine.
 
-3. Create a `.env.docker` file in the project root and fill it as in the `.env.sample` example file.
+3. Create a `.env.docker` file in the project root and fill it as in the `.env.sample` example file. The DB_CONN_STRING variable must include the docker-compose mongodb service name ("mongodb") instead of the IP/URI of the server hosting the database (e.g. "mongodb://mongodb:27017/trips" instead of "mongodb://localhost:27017/trips").
 
 4. Start the application using Docker Compose:
 
