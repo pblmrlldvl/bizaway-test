@@ -83,10 +83,16 @@ If you prefer to run the application without Docker Compose, follow these steps:
 
 ## Usage
 
-Once the application is running, you can access it in your browser at:
+Once the application is running, you can access its swagger UI in your browser at:
 
 ```
-http://localhost:8080
+http://localhost:8080/api-docs
+```
+
+or you can use it directly by calling any of the API endpoints under:
+
+```
+http://localhost:8080/
 ```
 
 ### API Endpoints
@@ -131,8 +137,3 @@ You can configure the app parameters by adjusting the fields in the `.env` or `.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 ```
-
-### Explanation:
-- The entire `README.md` text is in markdown format.
-- It contains sections for prerequisites, setup instructions, usage, API endpoints, configuration, and license.
-- The **API Endpoints** section lists all available routes with their HTTP methods, descriptions, and response details.

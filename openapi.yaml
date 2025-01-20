@@ -1,0 +1,123 @@
+openapi: 3.0.0
+info:
+  title: bizaway-test
+  version: 0.0.0
+servers:
+  - url: http://localhost:{port}
+    description: Local development server
+    variables:
+      port:
+        default: 8080
+        description: Port where the API is listening to
+paths:
+  /trips:
+    get:
+      summary: Get all trips
+      description: Retrieve a list of ordered trips fetched from the external trips API.
+      parameters:
+        - name: origin
+          in: query
+          required: true
+          description: Trips origin (IATA 3 letter code).
+          schema:
+            type: string
+            example: "JFK"
+        - name: destination
+          in: query
+          required: true
+          description: Trips destination (IATA 3 letter code).
+          schema:
+            type: string
+            example: "ATL"
+        - name: sort_by
+          in: query
+          required: false
+          description: Sort the trips by a specific field.
+          schema:
+            type: string
+            enum: [cheapest, fastest]
+            example: "fastest"
+      responses:
+        '200':
+          description: List of trips
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trip'
+  /trips/saved:
+    get:
+      summary: Get the saved trips
+      description: Retrieve the list of saved trips.
+      responses:
+        '200':
+          description: List of saved trips
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trip'
+    post:
+      summary: Save a trip
+      description: Save a new trip to the list of saved trips.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trip'
+      responses:
+        '201':
+          description: Trip saved successfully
+  /trips/saved/{id}:
+    delete:
+      summary: Delete a saved trip
+      description: Remove a trip from the list of saved trips using its unique identifier.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the trip to delete
+          schema:
+            type: string
+            example: "49d5923f-e408-40d7-8231-e0becea73d6a"
+      responses:
+        '204':
+          description: Trip deleted successfully
+        '404':
+          description: Trip not found
+components:
+  schemas:
+    Trip:
+      type: object
+      properties:
+        origin:
+          type: string
+          description: Origin of the trip (IATA 3 letter code)
+          example: "JFK"
+        destination:
+          type: string
+          description: Destination of the trip (IATA 3 letter code)
+          example: "ATL"
+        cost:
+          type: number
+          description: Cost of the trip
+          example: 150.5
+        duration:
+          type: number
+          description: Duration of the trip in hours
+          example: 3.5
+        type:
+          type: string
+          description: Type of trip
+          example: "flight"
+        id:
+          type: string
+          description: Unique identifier for the trip
+          example: "49d5923f-e408-40d7-8231-e0becea73d6a"
+        displayName:
+          type: string
+          description: Display name for the trip
+          example: "from ATL to JFK by flight"
