@@ -82,7 +82,7 @@ export const deleteSavedTrip = async (
     const { id } = req.params
 
     const result = await tripsService.deleteSavedTrip(id)
-    res.status(result ? 204 : 404)
+    res.status(result ? 204 : 404).send()
   } catch (e) {
     return next(e)
   }

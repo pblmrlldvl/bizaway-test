@@ -3,24 +3,24 @@ import Trips from './trips.types'
 import ExternalServiceError from '../shared/domain-errors/external-service-error'
 import PersistenceError from '../shared/domain-errors/persistence-error'
 import TripsRepository from './trips.repository'
+import Trip from './Trip'
 
 describe('TripsService', () => {
-    let tripsService: TripsService;
-    let tripsApiMock: jest.Mocked<Trips.TripsApiInterface>;
-    let tripsRepositoryMock: jest.Mocked<TripsRepository>;
+    let tripsService: TripsService
+    let tripsApiMock: jest.Mocked<Trips.TripsApiInterface>
+    let tripsRepositoryMock: jest.Mocked<TripsRepository>
 
     beforeEach(() => {
         tripsApiMock = {
             getTrips: jest.fn(),
-        };
+        }
         tripsRepositoryMock = {
             create: jest.fn(),
             getAll: jest.fn(),
             deleteById: jest.fn(),
-        } as unknown as jest.Mocked<TripsRepository>;
-
-        tripsService = new TripsService(tripsApiMock, tripsRepositoryMock);
-    });
+        } as unknown as jest.Mocked<TripsRepository>
+        tripsService = new TripsService(tripsApiMock, tripsRepositoryMock)
+    })
 
     describe('getTrips', () => {
         it('should call tripsApi.getTrips with correct parameters', async () => {
@@ -145,7 +145,7 @@ describe('TripsService', () => {
 
     describe('saveTrip', () => {
         it('should return the result of saving a trip using the trips repository', async () => {
-            const trip = { id: '1' } as Trips.Trip
+            const trip = { id: '1' } as Trip
             tripsRepositoryMock.create.mockResolvedValue(trip)
 
             const result = await tripsService.saveTrip(trip)
@@ -179,7 +179,7 @@ describe('TripsService', () => {
 
     describe('listAllSavedTrips', () => {
         it('should return all saved trips returned by the trips repository', async () => {
-            const trips = [{ id: '1' }] as Array<Trips.Trip>
+            const trips = [{ id: '1' }] as Array<Trip>
             tripsRepositoryMock.getAll.mockResolvedValue(trips)
 
             const result = await tripsService.listAllSavedTrips()
